@@ -1,0 +1,23 @@
+<nav class="menu navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse">
+        <div class="navbar-nav mr-auto">
+            <a routerLink="/login" class="btn btn-light" *ngIf="!isLoggedIn">Login</a>
+            <a routerLink="/" class="btn btn-light"  *ngIf="isLoggedIn">Home</a>
+            <div class="row">
+                <div class="col">
+                    <div ngbDropdown class="d-inline-block">
+                        <button class="btn" ngbDropdownToggle>Documentation</button>
+                        <div ngbDropdownMenu>
+                            <a class="dropdown-item" href="/documentation/start">How to start</a>
+                            <a class="dropdown-item" href="/documentation/examples">Examples</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a routerLink="/account" class="btn btn-light"  *ngIf="isLoggedIn">My account</a>
+        </div>
+        <div class="navbar-nav">
+            <a routerLink="/login" class="btn btn-warning"  *ngIf="isLoggedIn">Logout</a>
+        </div>
+    </div>
+</nav>

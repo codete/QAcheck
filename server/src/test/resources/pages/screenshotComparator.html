@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Regression testing platform</title>
+</head>
+<style>
+    .hidden-section {
+        display: none;
+    }
+</style>
+<body>
+<div>
+    <div>
+        <p>E2E test with static page comparator</p>
+    </div>
+    <button id="show-hidden-content">Click me to show hidden content!</button>
+    <a href="emptyLink"></a>
+    <div class="hidden-section">
+        <p>Hidden section</p>
+
+        <svg width="500" height="500">
+            <rect width="300" height="100" style="fill:rgb(255,193,36);"></rect>
+        </svg>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var hiddenEl = document.querySelector(".hidden-section");
+
+    document.querySelector("button").addEventListener("click", function (e) {
+        if (hiddenEl.classList.contains("hidden-section")) {
+            hiddenEl.classList.remove("hidden-section");
+        } else {
+            hiddenEl.classList.add("hidden-section");
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+
+// Background palette for dark themes.
+$mat-dark-theme-background: (
+  status-bar: black,
+  app-bar:    map_get($mat-grey, 900),
+  background: #424250,
+  hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
+  // card:       map_get($mat-grey, 800),
+  card: #33333d,
+  dialog:     #424250,
+  disabled-button: rgba(white, 0.12),
+  raised-button: #424250,
+  focused-button: $light-focused,
+  selected-button: map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
+  disabled-button-toggle: black,
+  unselected-chip: map_get($mat-grey, 700),
+  disabled-list-option: black,
+);
+
+// Foreground palette for dark themes.
+$mat-dark-theme-foreground: (
+  base:              white,
+  divider:           $light-dividers,
+  //divider: #2a2a33,
+  dividers:          $light-dividers,
+  disabled:          $light-disabled-text,
+  disabled-button:   rgba(white, 0.3),
+  disabled-text:     $light-disabled-text,
+  elevation:         black,
+  hint-text:         $light-disabled-text,
+  secondary-text:    $light-secondary-text,
+  icon:              white,
+  icons:             white,
+  text:              white,
+  slider-min:        white,
+  slider-off:        rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
+);
+
+$green-palette: (
+  default: #83c687,
+  light: #b4f9b7,
+  dark: #53955a,
+  contrast: (
+    default: $dark-primary-text,
+    light: $dark-primary-text,
+    dark: $dark-primary-text
+  )  
+);
+
+$orange-palette: (
+  default: #fd9126,
+  light: #ffc259,
+  dark: #c46200,
+  contrast: (
+    default: $dark-primary-text,
+    light: $dark-primary-text,
+    dark: $dark-primary-text
+  )
+);
+
+$dark-primary: mat-palette($green-palette, default, light, dark);
+$dark-accent:  mat-palette($orange-palette, default, light, dark);
+$dark-warn:    mat-palette($mat-deep-orange);
+$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+.dark-theme {
+    @import './custom';
+    @include angular-material-theme($dark-theme);
+
+    .mat-custom-toolbar {
+        background: #27272f;
+        color: #7e7e87;
+    }
+
+    .sidebar {
+        background: #33333d;
+        border-right: none;
+        .mat-list-item-content {
+            color: #7e7e87 !important;
+        }
+        a.active-section {
+            border-left-color: #7e7e87;
+        }
+    }
+
+    .mat-drawer-content, .mat-drawer-container {
+        background: #424250;
+    }
+
+    .mat-table {
+        tr.mat-row:hover {
+            background: #3e3e4a;
+            cursor: pointer;
+        }
+    }
+    .test-failed {
+      color: #fd9126;
+    }
+    .test-passed {
+      color: #83c687;
+    }
+
+    text.pie-label {
+      fill: #fff;
+    }
+    .chart-legend {
+      span.active {
+        span.legend-label-text {
+          color: #fff;
+        }
+      }
+      span.legend-label-text {
+        color: #fff;
+      }      
+    }
+}

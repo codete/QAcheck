@@ -1,0 +1,160 @@
+body {
+    font-family: 'Roboto Condensed', sans-serif !important;
+}
+button.mat-button, button.mat-flat-button, button.mat-raised-button, button.mat-stroked-button {
+    text-transform: uppercase;
+}
+/*
+import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+*/
+
+.cell-content-center {
+    display: flex;
+    align-items: center;
+}
+.cell-content-center .mat-icon {
+    margin-right: 20px;
+}
+
+
+.normal-space {
+    width: 24px !important;
+}
+.mat-dialog-actions {
+    justify-items: flex-end;
+}
+
+.mat-toolbar {
+    padding-left: 12px !important; 
+    padding-right: 12px !important; 
+    position: absolute !important;
+    z-index: 2;
+}
+
+.mat-toolbar h1 {
+    margin-left: 32px !important;
+}
+
+body { 
+    font-family: Roboto, Arial, sans-serif;
+    margin: 0;
+}
+.top-margin {
+    padding-top: 30px;
+}
+
+.text-right {
+    text-align: right;
+}
+.login-card {
+    width: 400px;
+    margin: auto;
+}
+.register-card {
+    width: 400px;
+    margin: auto;
+}
+.full-width {
+    width: 100%;
+}
+
+/*
+@import url('bootstrap.min.css');
+*/
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+.main-container {
+    position: absolute !important;
+    top: 60px;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+}
+
+mat-sidenav-content {
+    padding: 20px;
+}
+
+.mat-drawer-content {
+    transition: margin-left 0.3s;
+    margin-left: 60px !important;
+    padding: 30px 30px 0 30px;
+/*    padding-right: 30px;
+    padding-top: 30px;
+*/
+}
+.mat-drawer-content.expanded {
+    margin-left: 250px !important;
+}
+
+.sidenav {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    transition: width 0.3s;
+}
+.sidenav a {
+    border-left: 3px solid transparent;
+}
+.sidenav a.active-section {
+    border-left-color: #000;
+}
+
+.sidebar span {
+    margin-left: 16px;
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+
+.mat-drawer-inner-container {
+    overflow: hidden !important;
+}
+
+.sidebar.expanded {
+    width:250px;
+}
+.sidebar.expanded span {
+    opacity: 1;
+}
+
+
+/*
+.sidenav {
+    width: 120px;
+    height: 100%;
+    z-index: 1;
+    top: 20px;
+    left: 10px;
+    overflow-x: hidden;
+    padding-left: 0px;
+}
+
+.sidenav li {
+    padding: 6px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #2196F3;
+    display: block;
+}
+
+.sidenav li:hover {
+    color: #064579;
+}
+*/
+
+.button-pressed {
+    background-color: darkgreen;
+    color: lawngreen;
+}
+
+.btn:focus,.btn:active {
+    outline: none;
+    box-shadow: none;
+}
+
+.menu {
+    padding: 0;
+}

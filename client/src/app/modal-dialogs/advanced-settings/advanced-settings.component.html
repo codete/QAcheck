@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Comparison settings</h1>
+<div mat-dialog-content>
+
+    <section class="two-columns">
+        <div>Allowed difference: {{settings.allowedDifferencePercentage }}%</div>
+    </section>
+    <mat-slider [(ngModel)]="settings.allowedDifferencePercentage" min="0" max="100" style='width:100%'></mat-slider>
+
+    <section class="two-columns">
+      <div>Allowed delta: {{settings.allowedDelta }}</div>
+    </section>
+    <mat-slider [(ngModel)]="settings.allowedDelta" min="0" step="0.1" style="width: 100%"></mat-slider>
+    <mat-hint><small>Maximum allowed Euclidean distance between colors of 2 pixels in RGBA/CIELAB color space</small></mat-hint>
+
+      <section>
+              <mat-checkbox [(ngModel)]="settings.perceptualMode" style="width: 100%">Perceptual mode</mat-checkbox>
+              <mat-hint><small>Use CIELAB color space for pixels comparison</small></mat-hint>
+      </section>
+
+    <section class="two-columns">
+        <div>Hotizontal shift: {{settings.horizontalShift }} pixels.</div>
+    </section>
+    <mat-slider [(ngModel)]="settings.horizontalShift" min="0" max="32" style="width: 100%"></mat-slider>
+        
+
+    <section class="two-columns">
+        <div>Vertical shift: {{settings.verticalShift }} pixels.</div>
+    </section>
+    <mat-slider [(ngModel)]="settings.verticalShift" min="0" max="32" style="width: 100%"></mat-slider>
+
+        <section>
+            <mat-checkbox [(ngModel)]="settings.showDetectedShift">Show detected shift</mat-checkbox>
+            <mat-hint><small>Show detected shift (anti-aliasing) on generated diff image</small></mat-hint>
+        </section>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="onCancelClick()">Cancel</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="settings" cdkFocusInitial>Save settings & recompare</button>
+</div>

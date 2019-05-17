@@ -1,0 +1,31 @@
+<h3 *ngIf="testCase">{{testCase.testName}}</h3>
+<div class="mat-elevation-z8">
+    <table *ngIf="testRuns.length > 0" mat-table [dataSource]="testRuns" class="full-width">
+        
+        <ng-container matColumnDef="runTimestamp">
+            <th mat-header-cell *matHeaderCellDef> Run timestamp</th>
+            <td mat-cell *matCellDef="let element"><div class="cell-content-center"><mat-icon class="cell-right-padding" [class.test-passed]="element.passed" [class.test-failed]="!element.passed">lens</mat-icon> {{ element.runTimestamp | date: 'medium' }}</div></td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element" class="text-right"> <button mat-icon-button [matMenuTriggerFor]="appMenu" (click)="stopPropogation($event)"><mat-icon>more_vert</mat-icon></button> 
+                <mat-menu #appMenu="matMenu">
+                    <button mat-menu-item (click)="confirmDeletionDialog(element)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete test run</span>
+                    </button>
+                </mat-menu>
+            </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/test-runs/{{appName}}/{{row.uuid}}"></tr>
+    </table>
+
+    <mat-paginator [length]="totalLength"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="changePage($event)">
+    </mat-paginator>
+</div>

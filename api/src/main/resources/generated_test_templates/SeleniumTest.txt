@@ -1,0 +1,50 @@
+package {package};
+
+import com.codete.regression.api.screenshot.ScreenshotComparator;
+import com.codete.regression.api.screenshot.drivers.ScreenshotTakerType;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+import java.util.concurrent.TimeUnit;
+
+class {className} {
+
+    private static final String API_KEY = "{apiKey}";
+    private static final String SCROLL_ELEMENT_INTO_MIDDLE = "var viewPortHeight = " +
+               "Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
+               + "var elementTop = arguments[0].getBoundingClientRect().top;"
+               + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
+    private ScreenshotComparator screenshotComparator = new ScreenshotComparator(API_KEY, "{appName}", ScreenshotTakerType.BROWSER);
+    private WebDriver driver;
+
+    @BeforeEach
+    void setUp() {
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        driver.get("{pageUrl}");
+        {beforeEach}
+    }
+
+    @AfterEach
+    void tearDown() {
+        driver.close();
+    }
+
+    @Test
+    void mouseClickTest() {
+        {actionToPerform}
+        boolean screenshotEquals = screenshotComparator.compareScreenshotWithBaseline(driver, "{testName}");
+        Assertions.assertTrue(screenshotEquals, "Actual screenshot should match the baseline");
+    }
+    {customCode}
+}
+

@@ -1,0 +1,136 @@
+﻿<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-card class="login-card">
+        <mat-card-header>
+            <mat-card-title>Register</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field class="full-width">
+                <input type="text" matInput placeholder='First Name' formControlName="firstName" autocomplete="off"/>
+                <mat-error *ngIf="form.firstName.touched && form.firstName.errors">
+                    <div *ngIf="form.firstName.errors.required">First Name is required</div>
+                    <div *ngIf="form.firstName.errors.pattern">Your first name must contain only letters</div>
+                    <div *ngIf="form.firstName.errors.minlength">First Name must be at least 6 characters</div>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                    <input type="text" matInput placeholder="Last Name" formControlName="lastName" autocomplete="off"/>
+                    <mat-error *ngIf="form.lastName.touched && form.lastName.errors">
+                        <div *ngIf="form.lastName.errors.required">Last Name is required</div>
+                        <div *ngIf="form.lastName.errors.pattern">Your last name must contain only letters</div>
+                        <div *ngIf="form.lastName.errors.minlength">Last Name must be at least 6 characters</div>
+                    </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                    <input type="text" matInput placeholder="Username" formControlName="username" class="form-control" autocomplete="off"/>
+                    <mat-error *ngIf="form.username.touched && form.username.errors">
+                        <div *ngIf="form.username.errors.required">Username is required</div>
+                        <div *ngIf="form.username.errors.pattern">Your username must contain only numbers and letters</div>
+                        <div *ngIf="form.username.errors.minlength">Username must be at least 6 characters</div>
+                    </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <input type="text" matInput placeholder="Email" formControlName="email" autocomplete="off"/>
+                <mat-error *ngIf="form.email.touched && form.email.errors">
+                    <div *ngIf="form.email.errors.required">Email is required</div>
+                    <div *ngIf="form.email.errors.email">Wrong email format</div>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <input type="password" matInput placeholder="Password" formControlName="password"/>
+                <mat-error *ngIf="form.password.touched && form.password.errors">
+                    <div *ngIf="form.password.errors.required">Password is required</div>
+                    <div *ngIf="form.password.errors.minlength">Password must be at least 6 characters</div>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <input type="password" matInput placeholder="Confirm Password" formControlName="confirmPassword"/>
+                <mat-error *ngIf="form.confirmPassword.touched && form.confirmPassword.errors">
+                    <div *ngIf="form.confirmPassword.errors.required">Confirm Password is required</div>
+                    <div *ngIf="form.confirmPassword.errors.mustMatch">Passwords must match</div>
+                </mat-error>
+            </mat-form-field>
+                                
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button mat-raised-button color="primary">Register</button>
+            <button mat-button [routerLink]="['/login']">Cancel</button>
+        </mat-card-actions>          
+    </mat-card>
+</form>
+<!--
+<h2>Register</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" formControlName="firstName" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && form.firstName.errors }"/>
+        <div *ngIf="submitted && form.firstName.errors" class="invalid-feedback">
+            <div *ngIf="form.firstName.errors.required">First Name is required</div>
+            <div *ngIf="form.firstName.errors.pattern">Your first name must contain only letters</div>
+            <div *ngIf="form.firstName.errors.minlength">First Name must be at least 6 characters</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" formControlName="lastName" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && form.lastName.errors }"/>
+        <div *ngIf="submitted && form.lastName.errors" class="invalid-feedback">
+            <div *ngIf="form.lastName.errors.required">Last Name is required</div>
+            <div *ngIf="form.lastName.errors.pattern">Your last name must contain only letters</div>
+            <div *ngIf="form.lastName.errors.minlength">Last Name must be at least 6 characters</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" formControlName="username" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && form.username.errors }"/>
+        <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
+            <div *ngIf="form.username.errors.required">Username is required</div>
+            <div *ngIf="form.username.errors.pattern">Your username must contain only numbers and letters</div>
+            <div *ngIf="form.username.errors.minlength">Username must be at least 6 characters</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="username">Email</label>
+        <input type="text" formControlName="email" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && form.email.errors }"/>
+        <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+            <div *ngIf="form.email.errors.required">Email is required</div>
+            <div *ngIf="form.email.errors.email">Wrong email format</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && form.password.errors }"/>
+        <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
+            <div *ngIf="form.password.errors.required">Password is required</div>
+            <div *ngIf="form.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" formControlName="confirmPassword" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && form.confirmPassword.errors }" />
+        <div *ngIf="submitted && form.confirmPassword.errors" class="invalid-feedback">
+            <div *ngIf="form.confirmPassword.errors.required">Confirm Password is required</div>
+            <div *ngIf="form.confirmPassword.errors.mustMatch">Passwords must match</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">Register</button>
+        <img *ngIf="loading"
+             src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBF
+             Mi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MI
+             OggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEg
+             G4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8
+             pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMI
+             umIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAz
+             IIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAAD
+             Mwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAA
+             DMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAA
+             MyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+        <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+    </div>
+</form>
+-->

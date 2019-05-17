@@ -1,0 +1,50 @@
+<div class="step-div" *ngIf="step">
+
+    <div class="panels-container">
+        <div class="panel">
+            <button *ngIf="baseline" mat-raised-button (click)="acceptBaseline()" 
+                [class.btn-success]="step.userDecision === 1"
+                [class.btn-outline-success]="step.userDecision != 1">
+                accept baseline
+            </button>
+        </div>
+        <div class="panel">
+            <button mat-raised-button (click)="acceptCurrent()" 
+                [class.btn-success]="step.userDecision === 2"
+                [class.btn-outline-success]="step.userDecision != 2" *ngIf="baseline">
+                accept current
+            </button>
+
+            <button mat-raised-button (click)="addIgnoreArea()"><mat-icon>add</mat-icon> ignore area</button>
+            <button mat-raised-button (click)="saveSettingsAndRecompare()" [disabled]="!recompareButtonEnabled">save settings</button>
+            <button mat-raised-button (click)="advancedSettingsDialog()">Advanced settings</button>            
+            <div class="diff-status">
+                    <section>
+                        <mat-slide-toggle
+                            color="primary"
+                            [(ngModel)]="showingDiff"
+                            [disabled]="!baseline || !diff">
+                            {{ showingDiff ? 'Diff' : 'Current' }}
+                        </mat-slide-toggle>
+                    </section>
+                    <div *ngIf="comparisonSettings">Allowed difference: {{comparisonSettings.allowedDifferencePercentage}}%</div>
+            </div>            
+        </div>        
+    </div>
+
+    <div class="images-container">
+        <div class="screenshot-div">
+            <img *ngIf="baseline" class="screenshot" [src]="baseline"/>
+            <p *ngIf="!baseline" class="no-baseline">No baseline image. The image on the right will be used as a baseline during next runs.</p>
+        </div>
+
+        <div class="screenshot-div">
+            <div class="actual-box" *ngIf="current">
+                <img class="screenshot" (load)="publishOriginalWidth()" [src]="current" [hidden]="showingDiff" #cur/>
+                <img *ngIf="diff" class="screenshot" [src]="diff" [hidden]="!showingDiff"/>
+                <ignore-area [comparisonSettings]="comparisonSettings"></ignore-area>
+            </div>
+        </div>
+    </div>
+
+</div>

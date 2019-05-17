@@ -1,0 +1,26 @@
+<spinner></spinner>
+<alert></alert>
+
+<mat-toolbar color="custom-toolbar" mode="push" class="header mat-elevation-z6">
+    <button *ngIf="isAthenticated" mat-icon-button (click)="toggleMenu()"><mat-icon *ngIf="!menuExpanded">menu</mat-icon><mat-icon *ngIf="menuExpanded">chevron_left</mat-icon></button>
+    <img src="/assets/logo.png" style="height: 40px; margin-left: 35px">
+    <div class="normal-space"></div>
+    <button routerLink="/crawler-runner" *ngIf="isAthenticated" mat-raised-button color="primary" class="new-test-btn"><mat-icon>add</mat-icon> New tests</button>
+    <div class="toolbar-spacer"></div>
+</mat-toolbar>
+
+<mat-drawer-container class="main-container">
+    <mat-drawer #sidenav mode="side" opened="true" [class.expanded]="menuExpanded" class="sidenav sidebar" *ngIf="isAthenticated">
+        <mat-nav-list>
+            <a mat-list-item routerLink="/" routerLinkActive="active-section" [routerLinkActiveOptions]="{exact: true}"><mat-icon>apps</mat-icon> <span>Applications</span></a>
+            <a mat-list-item routerLink="/metrics" routerLinkActive="active-section"><mat-icon>bar_chart</mat-icon> <span>Statistics</span></a>
+            <a mat-list-item routerLink="/account" routerLinkActive="active-section"><mat-icon>settings</mat-icon> <span>Settings</span></a>
+            <a mat-list-item routerLink="/documentation" routerLinkActive="active-section"><mat-icon>help_outline</mat-icon> <span>Documentation</span></a>
+            <a mat-list-item routerLink="/login"><mat-icon>logout</mat-icon> <span>Logout</span></a>
+        </mat-nav-list>
+    </mat-drawer>
+
+    <mat-drawer-content [class.expanded]="menuExpanded && isAthenticated">
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

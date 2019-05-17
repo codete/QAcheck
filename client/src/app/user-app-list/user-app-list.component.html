@@ -1,0 +1,30 @@
+<h3>User applications</h3>
+
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" [(ngModel)]="filter">
+    <button mat-button *ngIf="filter" matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>
+
+<div class="mat-elevation-z8 table-rounded">
+    <table mat-table [dataSource]="dataSource" class="full-width">
+        <ng-container matColumnDef="appName">
+            <th mat-header-cell *matHeaderCellDef> Application name </th>
+            <td mat-cell *matCellDef="let element">{{element.appName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element" class="text-right"> 
+                <button mat-icon-button [matMenuTriggerFor]="appMenu" (click)="stopPropogation($event)"><mat-icon>more_vert</mat-icon></button> 
+                <mat-menu #appMenu="matMenu">
+                        <button mat-menu-item (click)="confirmDeletionDialog(element)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Delete app</span>
+                        </button>
+                </mat-menu>
+            </td>
+        </ng-container>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="test-cases/{{row.appName}}/10/0"></tr>
+    </table>
+</div>

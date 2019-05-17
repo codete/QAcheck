@@ -1,0 +1,7 @@
+<div id="ignore-area-box" #box class="svg_select_boundingRect absolute">
+</div>
+<div class="ignore-area-delete-button" [style.left.px]="ignoreAreaDeleteButton.positionX"
+     [style.top.px]="ignoreAreaDeleteButton.positionY"
+     [hidden]="ignoreAreaDeleteButton.hidden" (click)="removeArea()">
+    <b>X</b>
+</div>

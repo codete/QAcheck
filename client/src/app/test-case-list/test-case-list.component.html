@@ -1,0 +1,123 @@
+<h3>Test cases</h3>
+<div class="mat-elevation-z8 table-rounded" [formGroup]="filtersForm">
+    <table mat-table [dataSource]="testCases" class="full-width">
+        <ng-container matColumnDef="result">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-form-field class="small-input">
+                    <mat-label>Result</mat-label>
+                    <mat-select (selectionChange)="updateData()" formControlName="passed">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let result of resultOptions" [value]="result.value">{{result.title}}</mat-option>
+                    </mat-select>
+                </mat-form-field>                
+            </th>
+            <td mat-cell *matCellDef="let element"> <mat-icon [class.test-passed]="element.passed" [class.test-failed]="!element.passed" style='fint-size'>lens</mat-icon> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="testName">
+            <th mat-header-cell *matHeaderCellDef> 
+                <mat-form-field class="filter">
+                    <mat-label>Test name</mat-label>
+                    <input matInput formControlName="testName" (change)="updateData()">
+                    <button mat-button *ngIf="testName" matSuffix mat-icon-button aria-label="Clear" (click)="clearTestName()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{ element.testName }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="os">
+            <th mat-header-cell *matHeaderCellDef> 
+                <mat-form-field class="small-input">
+                    <mat-label>OS</mat-label>
+                    <mat-select (selectionChange)="updateData()" formControlName="os">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let os of operatingSystems" [value]="os">{{os}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.environment.os}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="browser">
+            <th mat-header-cell *matHeaderCellDef> 
+                <mat-form-field>
+                    <mat-label>Browser</mat-label>
+                    <mat-select (selectionChange)="updateData()" formControlName="browser">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let browser of browserTypes" [value]="browser">{{browser}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.environment.browser}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="viewPortWidth">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-form-field>
+                    <mat-label>View port width</mat-label>
+                    <mat-select (selectionChange)="updateData()" formControlName="viewPortWidth">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let width of viewPortWidths" [value]="width">{{width}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.environment.viewPortWidth}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="viewPortHeight">
+            <th mat-header-cell *matHeaderCellDef> 
+                <mat-form-field class="small-input">
+                    <mat-label>height</mat-label>
+                    <mat-select (selectionChange)="updateData()" formControlName="viewPortHeight">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let height of viewPortHeights" [value]="height">{{height}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.environment.viewPortHeight}} </td>
+        </ng-container>
+            
+        <ng-container matColumnDef="lastRunTimestamp">
+            <th mat-header-cell *matHeaderCellDef [attr.colspan]="2"> 
+                <div class="date-range">
+                    <mat-form-field>
+                        <input matInput formControlName="lastRunTimestampFrom" [matDatepicker]="pickerFrom" placeholder="Last run from" (dateChange)="updateData()">
+                        <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerFrom></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput formControlName="lastRunTimestampTo" [matDatepicker]="pickerTo" placeholder="to" (dateChange)="updateData()">
+                        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerTo></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastRunTimestamp | date: 'medium'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef style="display: none"> </th>
+            <td mat-cell *matCellDef="let element" class="text-right"> <button mat-icon-button [matMenuTriggerFor]="appMenu" (click)="stopPropogation($event)"><mat-icon>more_vert</mat-icon></button> 
+                <mat-menu #appMenu="matMenu">
+                    <button mat-menu-item (click)="confirmDeletionDialog(element)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete test case</span>
+                    </button>
+                </mat-menu>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/test-case/{{appName}}/{{row.uuid}}"></tr>
+
+    </table>
+    <mat-paginator 
+        [length]="totalLength"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [showFirstLastButtons]="true"
+        (page)="changePage($event)">
+    </mat-paginator>
+
+</div> 

@@ -1,0 +1,14 @@
+<h3>Test steps</h3>
+<div class="container">
+    <div class="steps-container">
+        <ng-container *ngFor="let step of testSteps">
+            <button *ngIf="step==displayedStep" mat-stroked-button (click)="chooseStep(step)">{{step.stepName}} <mat-icon [ngClass]="getColor(step)">{{getIcon(step)}}</mat-icon></button>
+            <button *ngIf="step!=displayedStep" mat-button (click)="chooseStep(step)">{{step.stepName}} <mat-icon [ngClass]="getColor(step)">{{getIcon(step)}}</mat-icon></button>
+        </ng-container>            
+    </div>
+    <div class="images-container">
+        <mat-card class="full-width">
+            <test-step [setStep]="displayedStep" class="full-width"></test-step>
+        </mat-card>
+    </div>
+</div>    

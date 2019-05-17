@@ -1,0 +1,2 @@
+INSERT INTO USER (ID, FIRST_NAME, LAST_NAME, USERNAME, EMAIL, PASSWORD, API_KEY, WHITE_THEME)
+VALUES (1, 'Admin', 'Admin', 'administrator', 'no-reply@codete.com', '$2a$10$zn4zHom1pGRvsE2PbZtycOieISDR3wmktHahOI5NJyTOOs16IoKrW', '9e1ecdcd-75e7-4a40-9f15-0ec651e813d5', true);

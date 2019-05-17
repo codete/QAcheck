@@ -1,0 +1,95 @@
+<ngx-spinner>
+    <div style="font-size: 20px; color: white">
+        <p>Site map crawler is running...</p>
+        <p>Current log: {{crawlerInstance.currentLog}}</p>
+        <p>Progress: {{crawlerInstance.progress | number : '1.2-2'}}%</p>
+    </div>
+</ngx-spinner>
+<div>
+    <h3>Site map crawler</h3>
+    <form style="padding-bottom: 20px">
+        <mat-card class="login-card">
+            <mat-card-header>
+                <mat-card-title>Site map crawler</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field class="full-width">
+                    <input matInput type="text" placeholder="App name" id="appName" required
+                    [(ngModel)]="sitemapCrawlerRequest.appName" name="appName">    
+                </mat-form-field>
+
+       
+                <mat-form-field class="full-width">
+                    <input matInput type="text" placeholder="Site map URL" id="sitemapPath" required
+                        [(ngModel)]="sitemapCrawlerRequest.sitemapPath" name="sitemapPath">
+                </mat-form-field>
+
+                <mat-checkbox id="detectDynamicElements"
+                    [(ngModel)]="sitemapCrawlerRequest.detectDynamicElements" name="detectDynamicElements">
+                    Detect dynamic elements
+                </mat-checkbox>
+
+                <mat-form-field class="full-width">
+                    <mat-label>OS</mat-label>
+                    <mat-select *ngIf="operatingSystems" [(ngModel)]="browserStackBrowser.os"
+                        (selectionChange)="onSelectOs($event.value)"
+                        name="selectedOs" id="os">
+                        <mat-option *ngIf="!browserStackBrowser.os" value="null">Select OS</mat-option>
+                        <mat-option *ngFor="let os of operatingSystems" [value]="os">{{os}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <mat-label>OS version</mat-label>
+                    <mat-select [(ngModel)]="browserStackBrowser.osVersion" 
+                        (selectionChange)="onSelectOsVersion($event.value)"
+                        name="browserStackBrowser.osVersion" id="osVersion">
+                        <mat-option *ngIf="!browserStackBrowser.osVersion" value="null">Select OS version</mat-option>
+                        <mat-option *ngFor="let osVersion of osVersions" [value]="osVersion">{{osVersion}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <mat-label>Browser</mat-label>
+                    <mat-select [(ngModel)]="browserStackBrowser.browser" (selectionChange)="onSelectBrowser($event.value)"
+                            name="selectedBrowser" id="browser">
+                        <mat-option *ngIf="!browserStackBrowser.browser" value="null">Select browser</mat-option>
+                        <mat-option *ngFor="let browser of browsers" value={{browser}}>{{browser}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <mat-label>Browser version</mat-label>
+                    <mat-select [(ngModel)]="browserStackBrowser.browserVersion"
+                            name="selectedBrowserVersion" id="browserVersion">
+                        <mat-option *ngIf="!browserStackBrowser.browserVersion" value="null">Select browser version</mat-option>
+                        <mat-option *ngFor="let browserVersion of browserVersions" value={{browserVersion}}>
+                            {{browserVersion}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">                
+                    <mat-label>Browser resolution</mat-label>
+                    <mat-select [(ngModel)]="sitemapCrawlerRequest.browserResolution"
+                            name="selectedBrowserResolution" id="browserResolution">
+                        <mat-option *ngIf="!sitemapCrawlerRequest.browserResolution" value="null">Select browser resolution</mat-option>
+                        <mat-option *ngFor="let browserResolution of browserResolutions" [value]="browserResolution">
+                            {{browserResolution.width}} x {{browserResolution.height}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div class="alert alert-danger saved-alert" role="alert" [hidden]="!errorHappened">
+                    Crawler error happened
+                </div>
+                <button mat-button mat-raised-button color="primary" type="submit" (click)="runSitemapCrawler()"
+                        [disabled]="!sitemapCrawlerRequest.browserResolution">Run crawler
+                </button>                
+        </mat-card-content>
+        </mat-card>
+    </form>
+    <div *ngIf="testFinished">
+        <p>Test finished. You can check your results in test cases.</p>
+    </div>
+</div>

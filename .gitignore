@@ -1,0 +1,5 @@
+.idea/
+target/
+*.iml
+server/src/main/resources/application-dev.yaml
+server/src/main/resources/application-prod.yaml

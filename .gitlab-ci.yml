@@ -1,0 +1,44 @@
+image: maven:3.6-jdk-11-slim
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2 -Dmaven.wagon.http.ssl.insecure=true "
+
+before_script:
+- mkdir -p $HOME/.m2/
+- echo '<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+      https://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <servers>
+      <server>
+        <id>codete</id>
+        <username>${MAVEN_USER}</username>
+        <password>${MAVEN_PASS}</password>
+      </server>
+    </servers>
+  </settings>' > $HOME/.m2/settings.xml
+
+stages:
+- test
+- deploy
+
+test:
+  stage: test
+  only:
+  - branches
+  - merge_requests
+  except:
+  - develop
+  tags:
+  - docker
+  script:
+  - mvn clean verify -B
+
+deploy_to_artifactory:
+  stage: deploy
+  only:
+  - develop
+  tags:
+  - docker
+  script:
+  - mvn deploy

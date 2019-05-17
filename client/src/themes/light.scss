@@ -1,0 +1,112 @@
+// Background palette for light themes.
+$mat-light-theme-background: (
+  status-bar: map_get($mat-grey, 300),
+  app-bar:    map_get($mat-grey, 100),
+//  background: map_get($mat-grey, 50),
+  background: white,
+  hover:      rgba(black, 0.04), // TODO(kara): check style with Material Design UX
+  card:       #fcfcfc,
+  dialog:     white,
+  disabled-button: rgba(black, 0.12),
+  raised-button: white,
+  focused-button: $dark-focused,
+  selected-button: map_get($mat-grey, 300),
+  selected-disabled-button: map_get($mat-grey, 400),
+  disabled-button-toggle: map_get($mat-grey, 200),
+  unselected-chip: map_get($mat-grey, 300),
+  disabled-list-option: map_get($mat-grey, 200),
+);
+
+
+// Foreground palette for light themes.
+$mat-light-theme-foreground: (
+  base:              black,
+  divider:           $dark-dividers,
+  dividers:          $dark-dividers,
+  disabled:          $dark-disabled-text,
+  disabled-button:   rgba(black, 0.26),
+  disabled-text:     $dark-disabled-text,
+  elevation:         black,
+  hint-text:         $dark-disabled-text,
+  secondary-text:    $dark-secondary-text,
+  icon:              rgba(black, 0.54),
+  icons:             rgba(black, 0.54),
+  text:              rgba(black, 0.87),
+  slider-min:        rgba(black, 0.87),
+  slider-off:        rgba(black, 0.26),
+  slider-off-active: rgba(black, 0.38),
+);
+
+$blue-palette: (
+  default: #00b8d4,
+  light: #62ebff,
+  dark: #0088a3,
+  contrast: (
+    default: $dark-primary-text,
+    light: $dark-primary-text,
+    dark: $dark-primary-text
+  )  
+);
+
+$orange-palette: (
+  default: #fd9126,
+  light: #ffc259,
+  dark: #c46200,
+  contrast: (
+    default: $dark-primary-text,
+    light: $dark-primary-text,
+    dark: $dark-primary-text
+  )
+);
+
+// Define the default theme
+$light-primary: mat-palette($blue-palette, default, light, dark);
+$light-accent:  mat-palette($orange-palette, default, light, dark);
+$light-theme:   mat-light-theme($light-primary, $light-accent);
+
+.light-theme {
+    @include angular-material-theme($light-theme);
+    @import './custom';
+
+    .mat-custom-toolbar {
+        background: #27272f;
+        color: #7e7e87;
+    }
+      
+    .sidebar {
+        background: #fcfcfc;
+        border-right: none;
+        .mat-list-item-content {
+            color: #7e7e87 !important;
+        }
+        a.active-section {
+            border-left-color: #7e7e87;
+        }
+    }
+    .mat-table {
+        tr.mat-row:hover {
+          background: #f5f5f5;
+          cursor: pointer;
+        }
+    }
+    .test-failed {
+      color: #fd9126;
+    }
+    .test-passed {
+      color: #00b8d4;
+    }
+
+    text.pie-label {
+      fill: #000;
+    }
+    .chart-legend {
+      span.active {
+        span.legend-label-text {
+          color: #000;
+        }
+      }
+      span.legend-label-text {
+        color: #909090;
+      }      
+    }    
+}

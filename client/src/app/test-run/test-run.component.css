@@ -1,0 +1,43 @@
+
+.primary {
+    color: red;
+}
+
+.container {
+    display: flex;
+    margin-bottom: 60px;
+}
+.steps-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 120px;
+    margin-right: 25px;
+}
+.images-container {
+    display: flex;
+    width: 100%;   
+}
+.choice-window {
+    position: absolute;
+    overflow: hidden;
+    top: 74px;
+    left: 150px;
+    right: 0px;
+}
+
+.test-step-name {
+    word-wrap: break-word;
+    font-size: 15px;
+}
+
+.test-step-status {
+    font-size: 16px;
+}
+
+.undecided {
+    color: orange;
+}
+
+.step-name-nav {
+    max-height: 90vh;
+}

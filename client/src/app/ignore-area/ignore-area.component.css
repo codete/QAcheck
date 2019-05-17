@@ -1,0 +1,23 @@
+.svg_select_boundingRect {
+    stroke-width: 1;
+    fill: pink;
+    stroke: black;
+    stroke-opacity: 0.8;
+    fill-opacity: 0.1;
+}
+
+.absolute {
+    position: absolute;
+    float: left;
+}
+
+#ignore-area-box {
+    height: 100%;
+    width: 100%;
+}
+
+.ignore-area-delete-button {
+    position: absolute;
+    color: red;
+    cursor: pointer;
+}

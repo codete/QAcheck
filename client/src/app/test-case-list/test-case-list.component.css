@@ -1,0 +1,23 @@
+.filter {
+    display: block;
+}
+
+.mat-header-cell {
+    padding: 5px;
+}
+
+.date-range {
+    display: flex;
+    width: 260px;
+}
+.date-range .mat-form-field {
+    margin:5px;
+    width: 140px;
+}
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+    display: none !important;
+}
+.small-input {
+    width: 90px;
+
+}

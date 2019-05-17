@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{ data.question }}</h1>
+<div mat-dialog-content>
+  <p *ngIf="data.info">{{ data.info }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="onNoClick()">No</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="data.payload" cdkFocusInitial>Yes</button>
+</div>

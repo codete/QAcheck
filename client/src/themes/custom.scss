@@ -1,0 +1,39 @@
+.mat-paginator-container {
+    font-size: 16px;
+    margin-top: -27px;
+    font-weight: 100;
+}
+.mat-paginator {
+    border-radius: 0 0 4px 4px;
+}
+.mat-table {
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.table-rounded {
+    border-radius: 4px;
+    margin-bottom: 60px;
+}
+  
+th.mat-header-cell {
+    font-size: 18px;
+}
+
+td.mat-cell {
+    font-size: 18px;
+}
+  
+tr.mat-row:last-of-type td {
+    border-bottom-color: transparent;
+}
+  
+tr.mat-row:hover {
+    background: #f5f5f5;
+    cursor: pointer;
+}
+  
+.test-decision {
+
+}
+  

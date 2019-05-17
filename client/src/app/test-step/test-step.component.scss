@@ -1,0 +1,78 @@
+.step-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.screenshot {
+    max-width: 100%;
+    max-height: 100%;
+    flex: 1;
+    float: left;
+    user-select: none;
+    border: 1px dashed black;
+}
+
+.actual-box {
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    float: left;    
+}
+
+.no-baseline {
+    top: 50%;
+    position: absolute;
+    width: 50%;
+    text-align: center;
+}
+
+.diff-status {
+    display: flex; 
+    width: 100%; 
+    flex-direction: row; 
+    justify-content: space-between;
+    margin-top: 18px;
+    div {
+        line-height: 24px;
+    }
+}
+
+.panels-container {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    flex-flow: wrap row;
+    margin-bottom: 20px;
+
+    .panel {
+        display: flex;
+        width: 50%;
+        box-sizing: border-box;
+        flex-wrap: wrap;
+        flex-shrink: 0;
+        padding-right: 5px;
+        &:last-of-type {
+            padding-left: 5px;
+        }
+
+        button {
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+    }
+}
+
+.images-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    .screenshot-div {
+        box-sizing: border-box;
+        overflow: hidden;
+        width: 50%;
+        padding-right: 5px;
+        &:last-of-type {
+            padding-left: 5px;
+        }
+    }    
+}

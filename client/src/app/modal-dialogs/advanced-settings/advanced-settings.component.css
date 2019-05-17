@@ -1,0 +1,14 @@
+.two-columns {
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.mat-dialog-actions {
+    justify-content: center;
+}
+
+.mat-hint {
+    display: block;
+    margin-bottom: 15px;
+}

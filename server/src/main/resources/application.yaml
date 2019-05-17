@@ -1,0 +1,32 @@
+oauth:
+  clientId: regression-testing-platform
+  clientSecret: $2a$10$MKvZMihMHzuGnQgjblLRo.53hwc1wTWVB818.vkUykAlkGPmZbHda
+
+crawler:
+  server:
+    url: http://localhost:8080
+  browserstack:
+    username: ""
+    key: ""
+spring:
+  datasource:
+    url: jdbc:h2:~/regression-testing-platform/regression_platfrom;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: false
+        use_sql_comments: false
+        format_sql: false
+    open-in-view: false
+  h2:
+    console:
+      enabled: true
+      path: /console
+logging:
+  level:
+    root: INFO
