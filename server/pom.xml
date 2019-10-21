@@ -108,6 +108,10 @@
             <version>5.4.2.Final</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
 
         <!--Overriding libs to newer versions due to java 11 problems with older versions-->
         <dependency>
