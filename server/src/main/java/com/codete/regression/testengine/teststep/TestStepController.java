@@ -1,16 +1,19 @@
 package com.codete.regression.testengine.teststep;
 
+import com.codete.regression.api.screenshot.Screenshot;
 import com.codete.regression.testengine.comparisonsettings.ComparisonSettingsDto;
 import com.codete.regression.testengine.teststepdetails.TestStepDetailsDto;
 import com.codete.regression.testengine.userdecision.UserDecision.UserDecisionEnum;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -59,5 +62,12 @@ public class TestStepController {
     @PutMapping("/{testStepId}/repeat-comparison")
     public boolean repeatComparison(@PathVariable("testStepId") long testStepId) {
         return testStepService.repeatComparison(testStepId);
+    }
+
+    @PreAuthorize("@testStepService.doesUserHaveAccess( #testStepId, authentication.name )")
+    @PostMapping("/{testStepId}/upload-baseline")
+    public boolean uploadBaselineScreenshot(@PathVariable("testStepId") long testStepId,
+                                            @RequestParam("image") MultipartFile image) {
+        return testStepService.runComparison(testStepId, image);
     }
 }
