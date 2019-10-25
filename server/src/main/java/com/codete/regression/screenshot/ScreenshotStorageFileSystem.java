@@ -57,6 +57,24 @@ public class ScreenshotStorageFileSystem implements ScreenshotStorage {
         }
     }
 
+    @Override
+    public void deleteByFileName(String screenshotStorageLocation, String fileName) {
+        try {
+            Path dirPath = Path.of(screenshotsDirectoryRootPath + screenshotStorageLocation);
+            if (!dirPath.toFile().exists()) {
+                return;
+            }
+            Files.walk(dirPath)
+                    .map(Path::toFile)
+                    .filter(file -> file.getName().startsWith(fileName))
+                    .filter(File::exists)
+                    .forEach(File::delete);
+        } catch (IOException ex) {
+            log.warn("Screenshot `" + fileName + "` couldn't be deleted.", ex);
+            throw new RuntimeException("Unable to save image with path=" + screenshotStorageLocation + File.separator + fileName);
+        }
+    }
+
     private void createDirectoryIfItDoesNotExists(String directoryPath) {
         File directory = new File(directoryPath);
         if (!directory.exists()) {

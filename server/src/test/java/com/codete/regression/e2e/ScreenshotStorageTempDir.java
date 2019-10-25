@@ -1,5 +1,6 @@
 package com.codete.regression.e2e;
 
+import com.codete.regression.api.screenshot.Screenshot;
 import com.codete.regression.screenshot.ScreenshotBufferedImage;
 import com.codete.regression.screenshot.ScreenshotStorage;
 import org.junit.Rule;
@@ -62,6 +63,23 @@ public class ScreenshotStorageTempDir implements ScreenshotStorage {
                     .forEach(File::delete);
         } catch (IOException e) {
             throw new RuntimeException("Screenshots couldn't be deleted.", e);
+        }
+    }
+
+    @Override
+    public void deleteByFileName(String screenshotPath, String fileName) {
+        try {
+            Path dirPath = Path.of(screenshotPath);
+            if (!dirPath.toFile().exists()) {
+                return;
+            }
+            Files.walk(dirPath)
+                    .map(Path::toFile)
+                    .filter(file -> file.getName().startsWith(fileName))
+                    .filter(File::exists)
+                    .forEach(File::delete);
+        } catch (IOException ex) {
+            throw new RuntimeException("Unable to save image with path=" + screenshotPath + File.separator + fileName);
         }
     }
 
