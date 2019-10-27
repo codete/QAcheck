@@ -51,6 +51,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 
 import {ConfirmDeleteionDialogComponent} from './modal-dialogs';
 import {AdvancedSettingsDialogComponent} from './modal-dialogs';
+import {BaselineUploadDialogComponent} from './modal-dialogs';
 
 import {OverlayContainer} from '@angular/cdk/overlay';
 
@@ -71,7 +72,8 @@ import { ThemeService } from './services/theme.service';
         AccountComponent,
         SpinnerComponent,
         ConfirmDeleteionDialogComponent,
-        AdvancedSettingsDialogComponent
+        AdvancedSettingsDialogComponent,
+        BaselineUploadDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -110,11 +112,13 @@ import { ThemeService } from './services/theme.service';
     ],
     entryComponents: [
         ConfirmDeleteionDialogComponent,
-        AdvancedSettingsDialogComponent
+        AdvancedSettingsDialogComponent,
+        BaselineUploadDialogComponent
     ],
     exports: [
         ConfirmDeleteionDialogComponent,
-        AdvancedSettingsDialogComponent
+        AdvancedSettingsDialogComponent,
+        BaselineUploadDialogComponent
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true},
