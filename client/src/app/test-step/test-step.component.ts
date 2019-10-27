@@ -1,18 +1,18 @@
-import { Component, ElementRef, Input, ViewChild } from "@angular/core";
-import { UserDecision } from "../models/user-decision";
-import { TestStep } from "../models/test-step";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { SafeResourceUrl } from "@angular/platform-browser";
-import { ScreenshotService } from "./screenshot.service";
-import { UserDecisionService } from "./user-decision.service";
-import { IgnoreAreaComponent } from "../ignore-area/ignore-area.component";
-import { ComparisonService } from "./comparison.service";
-import { ComparisonSettings } from "../models/comparison-settings";
-import { IgnoreAreaService } from "../ignore-area/ignore-area.service";
-import { TestStepService } from "../services/test-step.service";
-import { TestStepStatus } from "../models/test-step-status";
-import { MatSnackBar } from '@angular/material';
-import { AdvancedSettingsDialogComponent } from "../modal-dialogs";
+import {Component, ElementRef, Input, ViewChild} from "@angular/core";
+import {UserDecision} from "../models/user-decision";
+import {TestStep} from "../models/test-step";
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {SafeResourceUrl} from "@angular/platform-browser";
+import {ScreenshotService} from "./screenshot.service";
+import {UserDecisionService} from "./user-decision.service";
+import {IgnoreAreaComponent} from "../ignore-area/ignore-area.component";
+import {ComparisonService} from "./comparison.service";
+import {BaselineUploadService} from "./baseline-upload.service";
+import {ComparisonSettings} from "../models/comparison-settings";
+import {IgnoreAreaService} from "../ignore-area/ignore-area.service";
+import {TestStepService} from "../services/test-step.service";
+import {TestStepStatus} from "../models/test-step-status";
+import {AdvancedSettingsDialogComponent, BaselineUploadDialogComponent} from "../modal-dialogs";
 
 @Component({
     selector: "test-step",
@@ -40,7 +40,8 @@ export class TestStepComponent {
         private screenshotService: ScreenshotService,
         private comparisonService: ComparisonService,
         private ignoreAreaService: IgnoreAreaService,
-        private testStepService: TestStepService) {
+        private testStepService: TestStepService,
+        private baselineUploadService: BaselineUploadService) {
     }
 
     @Input()
@@ -96,6 +97,32 @@ export class TestStepComponent {
                 this.saveSettingsAndRecompare();
             }
         });
+    }
+
+    public uploadBaselineDialog() {
+        const dialogRef = this.dialog.open(BaselineUploadDialogComponent, {
+            width: '550px'
+        });
+        dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+                this.uploadBaseline(result);
+            }
+        });
+    }
+
+    private uploadBaseline(imageToUpload: File) {
+        this.recompareButtonEnabled = false;
+        try {
+            this.baselineUploadService.uploadBaseline(this.step.id, imageToUpload).subscribe((passed) => {
+                this.step.status = (passed) ? TestStepStatus.PASSED : TestStepStatus.FAILED;
+                this.fetchDetails();
+                this.recompareButtonEnabled = true;
+            }, () => {
+                this.recompareButtonEnabled = true;
+            });
+        } catch (e) {
+            this.recompareButtonEnabled = true;
+        }
     }
 
     private saveComparisonSettings() {

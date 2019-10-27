@@ -2,6 +2,11 @@
 
     <div class="panels-container">
         <div class="panel">
+            <button mat-raised-button (click)="uploadBaselineDialog()"
+                    [class.btn-success]="step.userDecision === 1"
+                    [class.btn-outline-success]="step.userDecision != 1">
+                upload baseline
+            </button>
             <button *ngIf="baseline" mat-raised-button (click)="acceptBaseline()" 
                 [class.btn-success]="step.userDecision === 1"
                 [class.btn-outline-success]="step.userDecision != 1">

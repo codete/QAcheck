@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Baseline Upload</h1>
+<div mat-dialog-content>
+  <label class="btn btn-default">
+    <input type="file" accept="image/x-png" (change)="selectFile($event)">
+  </label>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="onNoClick()">No</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="selectedFile" cdkFocusInitial>Yes</button>
+</div>
