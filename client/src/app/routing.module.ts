@@ -11,18 +11,18 @@ import {DocumentationComponent} from "./documentation/documentation.component";
 import {GeneralMetricComponent} from "./metric/general-metric.component";
 
 const routes: Routes = [
-    {path: "documentation", component: DocumentationComponent, pathMatch: "full"},
-    {path: "documentation/:id", component: DocumentationComponent, pathMatch: "full"},
+    {path: "documentation", component: DocumentationComponent, pathMatch: "full", data: { breadcrumb: "Documentation", level: 0}},
+    {path: "documentation/:id", component: DocumentationComponent, pathMatch: "full", data: { dynamicBreadcrumb: "id", level: 1}},
     {
         path: '', canActivate: [AuthGuard], children: [
-            {path: "metrics", component: GeneralMetricComponent, pathMatch: "full"},
-            {path: "account", component: AccountComponent, pathMatch: "full"},
-            {path: "test-runs/:appName/:testRunUuid", component: TestRunComponent, pathMatch: "full"},
+            {path: "metrics", component: GeneralMetricComponent, pathMatch: "full", data: { breadcrumb: "Metrics", level: 0}},
+            {path: "account", component: AccountComponent, pathMatch: "full", data: { breadcrumb: "Account", level: 0}},
+            {path: "test-runs/:appName/:testRunUuid", component: TestRunComponent, pathMatch: "full", data: { breadcrumb: "Test Run", level: 3}},
             {path: "test-case/:appName/:testCaseUuid", component: TestCaseComponent, pathMatch: "full"},
             {path: "crawler-runner", component: SitemapCrawlerComponent, pathMatch: "full"},
-            {path: "test-cases/:appName/:pageSize/:currentPage", component: TestCaseListComponent, pathMatch: "full"},
-            {path: "test-cases/:appName/:pageSize/:currentPage/:testName/:os/:browser/:viewPortWidth/:viewPortHeight/:passed/:lastRunTimestampFrom/:lastRunTimestampTo", component: TestCaseListComponent, pathMatch: "full"},
-            {path: "", component: UserAppListComponent, pathMatch: "full"},
+            {path: "test-cases/:appName/:pageSize/:currentPage", component: TestCaseListComponent, pathMatch: "full", data: { dynamicBreadcrumb: "appName", level: 1}},
+            {path: "test-cases/:appName/:pageSize/:currentPage/:testName/:os/:browser/:viewPortWidth/:viewPortHeight/:passed/:lastRunTimestampFrom/:lastRunTimestampTo", component: TestCaseListComponent, pathMatch: "full", data: { dynamicBreadcrumb: "appName", level: 1}},
+            {path: "", component: UserAppListComponent, pathMatch: "full", data: { breadcrumb: "Applications", level: 0}},
         ]
     }
 ];

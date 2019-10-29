@@ -20,6 +20,7 @@ import {SpinnerInterceptor} from "./spinner/spinner-interceptor.service";
 import {SpinnerComponent} from "./spinner/spinner.component";
 import {DocumentationModule} from "./documentation/documentation.module";
 import {MetricModule} from "./metric/metric.module";
+import {BreadcrumbComponent} from "./breadcrumb/breadcrumb.component";
 
 import {MenuModule} from "./menu/menu.module";
 
@@ -73,7 +74,8 @@ import { ThemeService } from './services/theme.service';
         SpinnerComponent,
         ConfirmDeleteionDialogComponent,
         AdvancedSettingsDialogComponent,
-        BaselineUploadDialogComponent
+        BaselineUploadDialogComponent,
+        BreadcrumbComponent
     ],
     imports: [
         BrowserModule,

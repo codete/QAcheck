@@ -1,0 +1,6 @@
+<div class="full-width" style="font-size: 16px; font-weight: bold;">
+    <span *ngFor="let breadcrumb of breadcrumbConfiguration.breadcrumbs">
+        <a mat-button routerLink="{{breadcrumb.url}}">{{breadcrumb.label}}<mat-icon fxFlex="10">keyboard_arrow_right</mat-icon></a>
+    </span>
+    <span><a mat-button disabled style="color: black">{{breadcrumbConfiguration.currentBreadcrumb.label}}</a></span>
+</div>
