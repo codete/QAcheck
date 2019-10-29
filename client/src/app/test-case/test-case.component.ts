@@ -7,6 +7,7 @@ import {TestCase} from "../models/test-case";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {ConfirmDeleteionDialogComponent} from "../modal-dialogs/confirm-deletion/confirm-deletion.component";
 import {PageEvent} from '@angular/material';
+import {BreadcrumbsService} from "../breadcrumb/breadcrumb.service";
 
 @Component({
     selector: "test-case",
@@ -29,6 +30,7 @@ export class TestCaseComponent implements OnInit {
 
     constructor(public testRunService: TestRunService,
                 private testCaseService: TestCaseService,
+                private breadcrumbService: BreadcrumbsService,
                 private route: ActivatedRoute,
                 public dialog: MatDialog) {
     }
@@ -36,7 +38,10 @@ export class TestCaseComponent implements OnInit {
     public ngOnInit() {
         this.appName = this.route.snapshot.paramMap.get("appName");
         const testCaseUuid = this.route.snapshot.paramMap.get("testCaseUuid");
-        this.testCaseService.fetchTestCaseByUuid(testCaseUuid).subscribe((testCase) => this.testCase = testCase);
+        this.testCaseService.fetchTestCaseByUuid(testCaseUuid).subscribe((testCase) => {
+            this.testCase = testCase;
+            this.breadcrumbService.setBreadcrumb(testCase.testName, '/' + this.route.snapshot.url.join('/'), 2);
+        });
         this.fetchTestSteps(testCaseUuid);
     }
 
