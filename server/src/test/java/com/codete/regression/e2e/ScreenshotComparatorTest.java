@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -20,6 +21,8 @@ import java.util.concurrent.TimeUnit;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+@Sql(scripts = "/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = "/clear.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class ScreenshotComparatorTest extends TestApplicationConfig {
 
     private static final String APP_NAME = "e2e_test";
