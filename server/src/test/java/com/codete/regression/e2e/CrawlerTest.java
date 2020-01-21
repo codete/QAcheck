@@ -15,6 +15,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.data.domain.Page;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -23,6 +24,8 @@ import java.util.concurrent.TimeUnit;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+@Sql(scripts = "/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = "/clear.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class CrawlerTest extends TestApplicationConfig {
 
     private static final String APP_NAME = "crawler_e2e_test";
