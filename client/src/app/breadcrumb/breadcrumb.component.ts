@@ -13,7 +13,7 @@ export class BreadcrumbComponent implements OnInit {
     private ROUTE_DATA_DYNAMIC_BREADCRUMB: string = "dynamicBreadcrumb";
     private ROUTE_DATA_LEVEL: string = "level";
 
-    private breadcrumbConfiguration: BreadcrumbsConfiguration;
+    public breadcrumbConfiguration: BreadcrumbsConfiguration;
 
     constructor(private breadcrumbsService: BreadcrumbsService, private activatedRoute: ActivatedRoute, private router: Router) {
         this.breadcrumbsService.get().subscribe((configuration: BreadcrumbsConfiguration) => {
