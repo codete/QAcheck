@@ -7,7 +7,7 @@ import {Observable, Subject} from "rxjs";
 })
 export class BreadcrumbsService {
 
-    private configuration: BreadcrumbsConfiguration;
+    public configuration: BreadcrumbsConfiguration;
     public configurationSource: Subject<BreadcrumbsConfiguration>;
     public configurationChanged$: Observable<BreadcrumbsConfiguration>;
 
