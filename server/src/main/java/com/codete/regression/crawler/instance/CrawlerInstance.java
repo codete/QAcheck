@@ -40,6 +40,7 @@ public class CrawlerInstance {
 
     CrawlerInstance(User user, LocalDateTime updateTimestamp) {
         this.user = user;
-        this.updateTimestamp = updateTimestamp;
+        this.currentLog = "";
+	this.updateTimestamp = updateTimestamp;
     }
 }
